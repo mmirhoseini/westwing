@@ -62,6 +62,8 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    private CampaignsListRecyclerViewAdapter adapter;
+    private ArrayList<Campaign> campaigns;
 
     @OnClick(R.id.error_container)
     void retryNetworkError(View view) {
@@ -108,8 +110,12 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
         View view = inflater.inflate(R.layout.fragment_campaigns_list, container, false);
 
         // inject views using ButterKnife
-        if (savedInstanceState == null)
-            ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view);
+
+        // reload list state on orientation change
+        if (isCampaignDataLoaded()) {
+            loadCampaignDataToAdapter();
+        }
 
         swipeRefresh.setOnRefreshListener(() -> loadCampaignsData());
 
@@ -127,7 +133,7 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
     }
 
     private boolean isCampaignDataLoaded() {
-        return recyclerView.getAdapter() != null && recyclerView.getAdapter().getItemCount() > 0;
+        return adapter != null && adapter.getItemCount() > 0;
     }
 
     private void loadCampaignsData() {
@@ -223,6 +229,11 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
 
     @Override
     public void setCampaigns(ArrayList<Campaign> campaigns) {
+        this.campaigns = campaigns;
+        loadCampaignDataToAdapter();
+    }
+
+    private void loadCampaignDataToAdapter() {
         listContainer.setVisibility(View.VISIBLE);
 
         if (columnCount <= 1) {
@@ -231,7 +242,8 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
             recyclerView.setLayoutManager(new GridLayoutManager(context, columnCount));
         }
 
-        recyclerView.setAdapter(new CampaignsListRecyclerViewAdapter(campaigns, listener));
+        adapter = new CampaignsListRecyclerViewAdapter(campaigns, listener);
+        recyclerView.setAdapter(adapter);
     }
 
     public interface OnListFragmentInteractionListener {

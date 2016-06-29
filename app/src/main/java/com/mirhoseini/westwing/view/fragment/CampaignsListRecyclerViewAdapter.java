@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.mirhoseini.westwing.R;
 import com.mirhoseini.westwing.model.Campaign;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,10 +20,10 @@ import butterknife.ButterKnife;
  */
 public class CampaignsListRecyclerViewAdapter extends RecyclerView.Adapter<CampaignsListRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Campaign> campaigns;
+    private final ArrayList<Campaign> campaigns;
     private final CampaignsListFragment.OnListFragmentInteractionListener listener;
 
-    public CampaignsListRecyclerViewAdapter(List<Campaign> campaigns, CampaignsListFragment.OnListFragmentInteractionListener listener) {
+    public CampaignsListRecyclerViewAdapter(ArrayList<Campaign> campaigns, CampaignsListFragment.OnListFragmentInteractionListener listener) {
         this.campaigns = campaigns;
         this.listener = listener;
     }
