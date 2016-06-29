@@ -5,7 +5,7 @@ package com.mirhoseini.westwing.view;
  */
 public interface MainView {
 
-    void showMessage(String message);
+    void showToastMessage(String message);
 
     void showInternetConnectionError();
 

@@ -31,7 +31,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import timber.log.Timber;
 
 /**
@@ -65,15 +64,8 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
     private CampaignsListRecyclerViewAdapter adapter;
     private ArrayList<Campaign> campaigns;
 
-    @OnClick(R.id.error_container)
-    void retryNetworkError(View view) {
-        loadCampaignsData();
-    }
-
-
     private int columnCount = 1;
     private OnListFragmentInteractionListener listener;
-    private MainView parentView;
 
     public CampaignsListFragment() {
     }
@@ -100,7 +92,7 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
     @Override
     protected void injectDependencies(ApplicationComponent component) {
         component
-                .plus(new CampaignModule(parentView, this))
+                .plus(new CampaignModule((MainView) getActivity(), this))
                 .inject(this);
     }
 
@@ -153,12 +145,7 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
                     + " must implement OnListFragmentInteractionListener");
         }
 
-        if (context instanceof MainView) {
-            parentView = (MainView) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement MainView");
-        }
+        Timber.d("Fragment Attached");
     }
 
     @Override
@@ -188,6 +175,9 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
         super.onDestroy();
 
         presenter.destroy();
+
+        Timber.d("Fragment Destroyed");
+
     }
 
     @Override

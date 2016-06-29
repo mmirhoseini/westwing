@@ -26,6 +26,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
+
+    // fixes espresso conflict with supportAnnotation new version
+    configurations.all {
+        resolutionStrategy {
+            force rootProject.ext.testLibraries.supportAnnotations
+            force rootProject.ext.libraries.androidSupport
+            force rootProject.ext.libraries.appCompat
+            force rootProject.ext.libraries.designSupport
+            force rootProject.ext.libraries.recyclerView
+        }
+    }
 }
 
 dependencies {
@@ -38,6 +49,8 @@ dependencies {
     androidTestCompile rootProject.ext.testLibraries.supportTestRunner
     androidTestCompile rootProject.ext.testLibraries.supportAnnotations
     androidTestCompile rootProject.ext.testLibraries.espresso
+    androidTestCompile rootProject.ext.testLibraries.espressoContrib
+
 
     compile rootProject.ext.libraries.appCompat
     compile rootProject.ext.libraries.androidSupport
@@ -68,5 +81,6 @@ dependencies {
     apt rootProject.ext.aptLibraries.daggerCompiler
 
     compile rootProject.ext.libraries.timber
+
 
 }

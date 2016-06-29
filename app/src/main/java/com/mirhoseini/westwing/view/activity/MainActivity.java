@@ -108,11 +108,11 @@ public class MainActivity extends BaseActivity implements MainView, CampaignsLis
     public void showExitMessage() {
         Timber.d("Showing Exit Message");
 
-        showMessage(resources.getString(R.string.msg_exit));
+        showToastMessage(resources.getString(R.string.msg_exit));
     }
 
     @Override
-    public void showMessage(String message) {
+    public void showToastMessage(String message) {
         Timber.d("Showing Toast Message: %s", message);
 
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
@@ -142,5 +142,12 @@ public class MainActivity extends BaseActivity implements MainView, CampaignsLis
     public void onListFragmentInteraction(Campaign campaign) {
         Intent campaignIntent = CampaignActivity.newIntent(context, campaign);
         startActivity(campaignIntent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        presenter = null;
     }
 }

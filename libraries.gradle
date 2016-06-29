@@ -58,12 +58,13 @@ ext {
             junit             : "junit:junit:${junitVersion}",
             robolectric       : "org.robolectric:robolectric:${robolectricVersion}",
             supportTestRunner : "com.android.support.test:runner:${supportTestVesion}",
+            supportTestRules  : "com.android.support.test:rules:${supportTestVesion}",
             supportAnnotations: "com.android.support:support-annotations:${androidSupportVersion}",
             mockito           : "org.mockito:mockito-core:${mockitoVersion}",
             dexmaker          : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
             dexmakerMockito   : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
-            supportTestRules  : "com.android.support.test:rules:${supportTestVesion}",
             espresso          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            espressoContrib   : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
     ]
 
 }
