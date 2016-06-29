@@ -66,12 +66,6 @@ public class CampaignPresenterImpl implements CampaignPresenter {
                             parentView.showInternetConnectionError();
                         }
                     }
-                },
-                () -> {
-                    if (view != null) {
-                        view.hideProgress();
-                        view.showRetryErrorMessage();
-                    }
                 });
 
     }
