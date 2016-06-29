@@ -4,6 +4,7 @@ package com.mirhoseini.westwing.service;
 
 import com.mirhoseini.westwing.model.Campaign;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.http.GET;
@@ -16,6 +17,6 @@ public interface CampaignApi {
 
     // http://static.westwing.de/cms/dont-delete/programming_task/data.json
     @GET("data.json")
-    Observable<List<Campaign>> getCampaignData();
+    Observable<ArrayList<Campaign>> getCampaignData();
 
 }

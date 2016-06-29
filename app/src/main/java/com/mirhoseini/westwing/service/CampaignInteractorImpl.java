@@ -5,6 +5,7 @@ import com.mirhoseini.westwing.di.CampaignScope;
 import com.mirhoseini.westwing.model.Campaign;
 import com.mirhoseini.westwing.util.SchedulerProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ public class CampaignInteractorImpl implements CampaignInteractor {
     private CampaignApi campaignApi;
     private SchedulerProvider scheduler;
 
-    private ReplaySubject<List<Campaign>> CampaignDataSubject;
+    private ReplaySubject<ArrayList<Campaign>> CampaignDataSubject;
     private Subscription campaignSubscription;
 
     @Inject
@@ -33,7 +34,7 @@ public class CampaignInteractorImpl implements CampaignInteractor {
 
 
     @Override
-    public Observable<List<Campaign>> loadCampaignData() {
+    public Observable<ArrayList<Campaign>> loadCampaignData() {
         if (campaignSubscription == null || campaignSubscription.isUnsubscribed()) {
             CampaignDataSubject = ReplaySubject.create();
 

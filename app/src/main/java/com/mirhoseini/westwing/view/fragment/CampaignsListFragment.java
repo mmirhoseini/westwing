@@ -25,12 +25,13 @@ import com.mirhoseini.westwing.presentation.CampaignPresenter;
 import com.mirhoseini.westwing.view.CampaignView;
 import com.mirhoseini.westwing.view.MainView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import timber.log.Timber;
 
 /**
@@ -61,6 +62,11 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @OnClick(R.id.error_container)
+    void retryNetworkError(View view) {
+        loadCampaignsData();
+    }
 
 
     private int columnCount = 1;
@@ -102,13 +108,26 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
         View view = inflater.inflate(R.layout.fragment_campaigns_list, container, false);
 
         // inject views using ButterKnife
-        ButterKnife.bind(this, view);
+        if (savedInstanceState == null)
+            ButterKnife.bind(this, view);
 
         swipeRefresh.setOnRefreshListener(() -> loadCampaignsData());
 
-        loadCampaignsData();
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (!isCampaignDataLoaded()) {
+            loadCampaignsData();
+        }
+
+    }
+
+    private boolean isCampaignDataLoaded() {
+        return recyclerView.getAdapter() != null && recyclerView.getAdapter().getItemCount() > 0;
     }
 
     private void loadCampaignsData() {
@@ -137,15 +156,32 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
     }
 
     @Override
+    public void showOfflineMessage() {
+        Timber.d("Showing Offline Message");
+
+        Snackbar.make(getView(), R.string.offline_message, Snackbar.LENGTH_LONG)
+                .setAction(R.string.go_online, v -> {
+                    startActivity(new Intent(
+                            Settings.ACTION_WIFI_SETTINGS));
+                })
+                .setActionTextColor(Color.GREEN)
+                .show();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         listener = null;
-
-        // call destroy to remove references to objects
-        presenter.setView(null);
         presenter = null;
 
         Timber.d("Fragment Detached");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        presenter.destroy();
     }
 
     @Override
@@ -179,14 +215,14 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
 
         errorContainer.setVisibility(View.VISIBLE);
 
-        Snackbar.make(getView(), R.string.retry_message, Snackbar.LENGTH_LONG)
+        Snackbar.make(getView(), R.string.retry_message, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.load_retry, v -> presenter.loadData(Utils.isConnected(context)))
                 .setActionTextColor(Color.RED)
                 .show();
     }
 
     @Override
-    public void setCampaigns(List<Campaign> campaigns) {
+    public void setCampaigns(ArrayList<Campaign> campaigns) {
         listContainer.setVisibility(View.VISIBLE);
 
         if (columnCount <= 1) {

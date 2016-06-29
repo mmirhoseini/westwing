@@ -50,6 +50,9 @@ public class CampaignPresenterImpl implements CampaignPresenter {
                     if (view != null) {
                         view.hideProgress();
                         view.setCampaigns(campaigns);
+
+                        if (!isConnected)
+                            view.showOfflineMessage();
                     }
                 },
                 throwable -> {
@@ -76,7 +79,7 @@ public class CampaignPresenterImpl implements CampaignPresenter {
             subscription.unsubscribe();
 
         view = null;
-        parentView=null;
+        parentView = null;
         interactor = null;
     }
 

@@ -8,14 +8,27 @@
     android:orientation="vertical"
     tools:context="com.mirhoseini.westwing.view.activity.CampaignActivity">
 
-    <ImageView
-        android:id="@+id/banner"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="Campaign Banner"
-        android:cropToPadding="true"
-        android:scaleType="fitCenter" />
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="Campaign Banner"
+            android:cropToPadding="true"
+            android:scaleType="fitCenter" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,10 +97,5 @@
         android:layout_marginStart="16dp"
         android:autoLink="web"
         android:textAppearance="@style/TextVerySmall"
-        app:layout_constraintBottom_toBottomOf="@+id/container"
-        app:layout_constraintLeft_toLeftOf="@+id/container"
-        app:layout_constraintRight_toRightOf="@+id/container"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
         tools:text="Navigation Url" />
 </LinearLayout>

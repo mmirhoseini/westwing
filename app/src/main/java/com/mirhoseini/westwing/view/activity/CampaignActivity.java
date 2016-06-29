@@ -6,10 +6,13 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.mirhoseini.utils.Utils;
 import com.mirhoseini.westwing.R;
 import com.mirhoseini.westwing.di.ApplicationComponent;
+import com.mirhoseini.westwing.model.Banner;
 import com.mirhoseini.westwing.model.Campaign;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -36,6 +39,8 @@ public class CampaignActivity extends BaseActivity {
     // injecting views via Butterknife
     @BindView(R.id.banner)
     ImageView banner;
+    @BindView(R.id.progress)
+    ProgressBar progress;
     @BindView(R.id.time)
     TextView time;
     @BindView(R.id.name)
@@ -90,25 +95,38 @@ public class CampaignActivity extends BaseActivity {
     }
 
     private void loadBanner() {
+        Banner bannerDetails = campaign.getImages().getBanner();
+
+        // avoid UI shock! by calculating banner minimum height
+        banner.setMinimumHeight(calculateBannerMinimumHeight(bannerDetails));
+
         isBannerLoading = true;
+        progress.setVisibility(View.VISIBLE);
 
         Picasso.with(context)
-                .load(campaign.getImages().getBanner().getUrl())
-                .placeholder(R.drawable.progress_animation)
+                .load(bannerDetails.getUrl())
                 .error(R.drawable.ic_no_internet)
                 .into(banner, new Callback() {
                     @Override
                     public void onSuccess() {
+                        progress.setVisibility(View.GONE);
                         isBannerLoaded = true;
                         isBannerLoading = false;
                     }
 
                     @Override
                     public void onError() {
+                        progress.setVisibility(View.GONE);
                         isBannerLoaded = false;
                         isBannerLoading = false;
                     }
                 });
+    }
+
+    private int calculateBannerMinimumHeight(Banner bannerDetails) {
+        int width = Utils.getDisplayWidth(this);
+        int height = bannerDetails.getHeight() * width / bannerDetails.getWidth();
+        return height;
     }
 
     @Override

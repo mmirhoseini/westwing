@@ -67,7 +67,6 @@ public class MainActivity extends BaseActivity implements MainView, CampaignsLis
 
     @Override
     protected void onResume() {
-        Timber.d("Activity Resumed");
         super.onResume();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -82,10 +81,13 @@ public class MainActivity extends BaseActivity implements MainView, CampaignsLis
         showFragments();
 
         presenter.onResume();
+
+        Timber.d("Activity Resumed");
     }
 
     private void createFragments() {
         campaignsListFragment = CampaignsListFragment.newInstance(1);
+        campaignsListFragment.setRetainInstance(true);
     }
 
     private void showFragments() {
@@ -122,7 +124,7 @@ public class MainActivity extends BaseActivity implements MainView, CampaignsLis
 
         hideInternetConnectionError();
 
-        internetConnectionDialog = Utils.showNoInternetConnectionDialog(context, false);
+        internetConnectionDialog = Utils.showNoInternetConnectionDialog(this, true);
     }
 
     @Override

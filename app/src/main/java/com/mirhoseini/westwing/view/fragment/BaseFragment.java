@@ -1,6 +1,6 @@
 package com.mirhoseini.westwing.view.fragment;
 
-import android.os.Bundle;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import com.mirhoseini.westwing.WestwingApplication;
@@ -12,8 +12,8 @@ import com.mirhoseini.westwing.di.ApplicationComponent;
 public abstract class BaseFragment extends Fragment {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         injectDependencies(WestwingApplication.getComponent());
 

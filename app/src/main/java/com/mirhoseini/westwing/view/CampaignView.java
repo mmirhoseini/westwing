@@ -3,12 +3,15 @@ package com.mirhoseini.westwing.view;
 
 import com.mirhoseini.westwing.model.Campaign;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Mohsen on 29/06/16.
  */
 public interface CampaignView {
+
+    void showOfflineMessage();
 
     void showProgress();
 
@@ -18,6 +21,6 @@ public interface CampaignView {
 
     void showRetryErrorMessage();
 
-    void setCampaigns(List<Campaign> campaigns);
+    void setCampaigns(ArrayList<Campaign> campaigns);
 
 }
