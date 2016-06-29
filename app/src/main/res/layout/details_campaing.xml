@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.mirhoseini.westwing.view.activity.CampaignActivity">
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="Campaign Banner"
+        android:cropToPadding="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/container"
+        app:layout_constraintRight_toRightOf="@+id/container"
+        app:layout_constraintTop_toTopOf="@+id/container"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextLarge"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintLeft_toLeftOf="@+id/container"
+        app:layout_constraintRight_toLeftOf="@+id/time"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/sub_line"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:textAppearance="@style/TextSmall"
+        app:layout_constraintLeft_toLeftOf="@+id/container"
+        app:layout_constraintRight_toRightOf="@+id/container"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:text="SubLine" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextMedium"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_url"
+        app:layout_constraintLeft_toLeftOf="@+id/container"
+        app:layout_constraintRight_toRightOf="@+id/container"
+        app:layout_constraintTop_toBottomOf="@+id/sub_line"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:text="Details" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="61dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextSmall"
+        app:layout_constraintRight_toRightOf="@+id/container"
+        app:layout_constraintTop_toBottomOf="@+id/banner"
+        tools:text="Start Time" />
+
+    <TextView
+        android:id="@+id/navigation_url"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:autoLink="web"
+        android:textAppearance="@style/TextVerySmall"
+        app:layout_constraintBottom_toBottomOf="@+id/container"
+        app:layout_constraintLeft_toLeftOf="@+id/container"
+        app:layout_constraintRight_toRightOf="@+id/container"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:text="Navigation Url" />
+</android.support.constraint.ConstraintLayout>
