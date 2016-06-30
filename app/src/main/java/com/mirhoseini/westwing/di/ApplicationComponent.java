@@ -14,13 +14,7 @@ import dagger.Component;
         AndroidModule.class,
         ApplicationModule.class,
         ApiModule.class,
-        ConverterModule.class,
-        CallAdapterModule.class,
-        CacheModule.class,
-        InterceptorModule.class,
-        ClientModule.class,
-        LoggerModule.class,
-        GsonModule.class
+        ClientModule.class
 })
 public interface ApplicationComponent {
 

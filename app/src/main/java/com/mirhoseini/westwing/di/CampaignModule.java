@@ -24,11 +24,13 @@ public class CampaignModule {
     }
 
     @Provides
+    @CampaignScope
     public CampaignView provideView() {
         return view;
     }
 
     @Provides
+    @CampaignScope
     public CampaignPresenter providePresenter(CampaignPresenterImpl presenter) {
         presenter.setView(view);
         presenter.setParentView(parentView);
@@ -36,6 +38,7 @@ public class CampaignModule {
     }
 
     @Provides
+    @CampaignScope
     public CampaignInteractor provideInteractor(CampaignInteractorImpl interactor) {
         return interactor;
     }

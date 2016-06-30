@@ -52,9 +52,6 @@ public class CampaignActivity extends BaseActivity {
     @BindView(R.id.navigation_url)
     TextView navigationUrl;
 
-    private boolean isBannerLoaded = false;
-    private boolean isBannerLoading = false;
-
     @OnClick(R.id.banner)
     void onBannerClick(View view) {
         if (!isBannerLoaded && !isBannerLoading)
@@ -62,7 +59,19 @@ public class CampaignActivity extends BaseActivity {
     }
 
     Campaign campaign;
+    private boolean isBannerLoaded = false;
+    private boolean isBannerLoading = false;
 
+    public static Intent newIntent(Context context, Campaign campaign) {
+        Intent intent = new Intent(context, CampaignActivity.class);
+        intent.putExtra(CampaignActivity.EXTRA_CAMPAIGN_DATA, campaign);
+        return intent;
+    }
+
+    @Override
+    protected void injectDependencies(ApplicationComponent component) {
+        component.inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,16 +136,5 @@ public class CampaignActivity extends BaseActivity {
         int width = Utils.getDisplayWidth(this);
         int height = bannerDetails.getHeight() * width / bannerDetails.getWidth();
         return height;
-    }
-
-    @Override
-    protected void injectDependencies(ApplicationComponent component) {
-        component.inject(this);
-    }
-
-    public static Intent newIntent(Context context, Campaign campaign) {
-        Intent intent = new Intent(context, CampaignActivity.class);
-        intent.putExtra(CampaignActivity.EXTRA_CAMPAIGN_DATA, campaign);
-        return intent;
     }
 }

@@ -10,7 +10,6 @@ import com.mirhoseini.westwing.R;
 import com.mirhoseini.westwing.model.Campaign;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,14 +56,13 @@ public class CampaignsListRecyclerViewAdapter extends RecyclerView.Adapter<Campa
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public final View view;
+        public Campaign campaign;
         @BindView(R.id.name)
         TextView name;
         @BindView(R.id.sub_line)
         TextView subLine;
         @BindView(R.id.navigation_url)
         TextView navigationUrl;
-
-        public Campaign campaign;
 
         public ViewHolder(View view) {
             super(view);

@@ -1,11 +1,9 @@
 package com.mirhoseini.westwing.service;
 
 
-
 import com.mirhoseini.westwing.model.Campaign;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.http.GET;
 import rx.Observable;

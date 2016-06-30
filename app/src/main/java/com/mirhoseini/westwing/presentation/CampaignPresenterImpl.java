@@ -78,6 +78,8 @@ public class CampaignPresenterImpl implements CampaignPresenter {
         if (subscription != null && !subscription.isUnsubscribed())
             subscription.unsubscribe();
 
+        interactor.onDestroy();
+
         view = null;
         parentView = null;
         interactor = null;

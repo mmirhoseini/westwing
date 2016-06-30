@@ -40,7 +40,6 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
 
     private static final String ARG_COLUMN_COUNT = "column-count";
 
-
     //injecting dependencies via Dagger
     @Inject
     Context context;
@@ -61,6 +60,7 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
     private CampaignsListRecyclerViewAdapter adapter;
     private ArrayList<Campaign> campaigns;
 
@@ -97,45 +97,6 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_campaigns_list, container, false);
-
-        // inject views using ButterKnife
-        ButterKnife.bind(this, view);
-
-        // reload list state on orientation change
-        if (isCampaignDataLoaded()) {
-            loadCampaignDataToAdapter();
-        }
-
-        swipeRefresh.setOnRefreshListener(() -> loadCampaignsData());
-
-        return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if (!isCampaignDataLoaded()) {
-            loadCampaignsData();
-        }
-
-    }
-
-    private boolean isCampaignDataLoaded() {
-        return adapter != null && adapter.getItemCount() > 0;
-    }
-
-    private void loadCampaignsData() {
-        swipeRefresh.setRefreshing(true);
-
-        presenter.loadData(Utils.isConnected(context));
-    }
-
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
@@ -146,6 +107,46 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
         }
 
         Timber.d("Fragment Attached");
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_campaigns_list, container, false);
+
+        // inject views using ButterKnife
+        ButterKnife.bind(this, view);
+
+        // reload list state after orientation change
+        if (savedInstanceState != null && isCampaignDataLoaded()) {
+            loadCampaignDataToAdapter();
+        }
+
+        // enable pull to refresh function
+        swipeRefresh.setOnRefreshListener(() -> requestCampaignsData());
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // in case of offline, when returning from setting
+        if (!isCampaignDataLoaded()) {
+            requestCampaignsData();
+        }
+
+    }
+
+    private boolean isCampaignDataLoaded() {
+        return adapter != null && adapter.getItemCount() > 0;
+    }
+
+    private void requestCampaignsData() {
+        swipeRefresh.setRefreshing(true);
+
+        presenter.loadData(Utils.isConnected(context));
     }
 
     @Override
@@ -236,6 +237,7 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
         recyclerView.setAdapter(adapter);
     }
 
+    // an interface as a hock to MainActivity
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Campaign campaign);
     }

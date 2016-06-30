@@ -1,4 +1,3 @@
-
 package com.mirhoseini.westwing.model;
 
 import android.os.Parcel;
@@ -12,40 +11,6 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Images implements Parcelable {
 
-    @SerializedName("banner")
-    @Expose
-    private Banner banner;
-
-    public Banner getBanner() {
-        return banner;
-    }
-
-    public void setBanner(Banner banner) {
-        this.banner = banner;
-    }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.banner, flags);
-    }
-
-    public Images() {
-    }
-
-    public Images(Banner banner) {
-        this.banner = banner;
-    }
-
-    protected Images(Parcel in) {
-        this.banner = in.readParcelable(Banner.class.getClassLoader());
-    }
-
     public static final Parcelable.Creator<Images> CREATOR = new Parcelable.Creator<Images>() {
         @Override
         public Images createFromParcel(Parcel source) {
@@ -57,4 +22,37 @@ public class Images implements Parcelable {
             return new Images[size];
         }
     };
+    @SerializedName("banner")
+    @Expose
+    private Banner banner;
+
+    public Images() {
+    }
+
+
+    public Images(Banner banner) {
+        this.banner = banner;
+    }
+
+    protected Images(Parcel in) {
+        this.banner = in.readParcelable(Banner.class.getClassLoader());
+    }
+
+    public Banner getBanner() {
+        return banner;
+    }
+
+    public void setBanner(Banner banner) {
+        this.banner = banner;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.banner, flags);
+    }
 }

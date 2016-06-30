@@ -34,7 +34,7 @@ public class MainPresenterImpl implements MainPresenter {
         doubleBackToExitPressedOnce = false;
 
         // dismiss no internet connection dialog in case of getting back from setting and connection fixed
-        if(view!=null)
+        if (view != null)
             view.hideInternetConnectionError();
     }
 
@@ -44,13 +44,13 @@ public class MainPresenterImpl implements MainPresenter {
         if (doubleBackToExitPressedOnce) {
             Timber.d("Exiting");
 
-            if(view!=null)
+            if (view != null)
                 view.exit();
         } else {
 
             doubleBackToExitPressedOnce = true;
 
-            if(view!=null)
+            if (view != null)
                 view.showExitMessage();
 
             Timer t = new Timer();

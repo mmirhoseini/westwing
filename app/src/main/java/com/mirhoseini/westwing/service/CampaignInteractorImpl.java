@@ -6,7 +6,6 @@ import com.mirhoseini.westwing.model.Campaign;
 import com.mirhoseini.westwing.util.SchedulerProvider;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -46,6 +45,12 @@ public class CampaignInteractorImpl implements CampaignInteractor {
 
         return CampaignDataSubject.asObservable();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        if (campaignSubscription != null && !campaignSubscription.isUnsubscribed())
+            campaignSubscription.unsubscribe();
     }
 
 }

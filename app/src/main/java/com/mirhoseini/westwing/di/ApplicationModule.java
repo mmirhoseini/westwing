@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.mirhoseini.utils.Utils;
 import com.mirhoseini.westwing.BuildConfig;
+import com.mirhoseini.westwing.util.AppSchedulerProvider;
 import com.mirhoseini.westwing.util.Constants;
 import com.mirhoseini.westwing.util.SchedulerProvider;
-import com.mirhoseini.westwing.util.AppSchedulerProvider;
 
 import java.io.File;
 
@@ -34,7 +34,7 @@ public class ApplicationModule {
     @Singleton
     @Named("networkTimeoutInSeconds")
     public int provideNetworkTimeoutInSeconds() {
-        return 30;
+        return Constants.NETWORK_CONNECTION_TIMEOUT;
     }
 
     @Provides
@@ -53,7 +53,21 @@ public class ApplicationModule {
     @Singleton
     @Named("cacheSize")
     public long provideCacheSize() {
-        return 10 * 1024 * 1024; // 10 MB
+        return Constants.CACHE_SIZE;
+    }
+
+    @Provides
+    @Singleton
+    @Named("cacheMaxAge")
+    public int provideCacheMaxAgeMinutes() {
+        return Constants.CACHE_MAX_AGE;
+    }
+
+    @Provides
+    @Singleton
+    @Named("cacheMaxStale")
+    public int provideCacheMaxStaleDays() {
+        return Constants.CACHE_MAX_STALE;
     }
 
     @Provides

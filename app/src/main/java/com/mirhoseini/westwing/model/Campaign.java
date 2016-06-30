@@ -5,41 +5,61 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Mohsen on 29/06/16.
  */
 public class Campaign implements Parcelable {
 
+    public static final android.os.Parcelable.Creator<Campaign> CREATOR = new android.os.Parcelable.Creator<Campaign>() {
+        @Override
+        public Campaign createFromParcel(android.os.Parcel source) {
+            return new Campaign(source);
+        }
+
+        @Override
+        public Campaign[] newArray(int size) {
+            return new Campaign[size];
+        }
+    };
     @SerializedName("name")
     @Expose
     private String name;
-
     @SerializedName("subline")
     @Expose
     private String subline;
-
     @SerializedName("navigation_url")
     @Expose
     private String navigationUrl;
-
     @SerializedName("description")
     @Expose
     private String description;
-
     @SerializedName("start_time_formatted")
     @Expose
     private String startTimeFormatted;
-
     @SerializedName("images")
     @Expose
     private Images images;
 
-    @SerializedName("videos")
-    @Expose
-    private List<Videos> videos = new ArrayList<>();
+    public Campaign() {
+    }
+
+    public Campaign(String name, String subline, String navigationUrl, String description, String startTimeFormatted, Images images) {
+        this.name = name;
+        this.subline = subline;
+        this.navigationUrl = navigationUrl;
+        this.description = description;
+        this.startTimeFormatted = startTimeFormatted;
+        this.images = images;
+    }
+
+    protected Campaign(android.os.Parcel in) {
+        this.name = in.readString();
+        this.subline = in.readString();
+        this.navigationUrl = in.readString();
+        this.description = in.readString();
+        this.startTimeFormatted = in.readString();
+        this.images = in.readParcelable(Images.class.getClassLoader());
+    }
 
     public String getName() {
         return name;
@@ -89,18 +109,25 @@ public class Campaign implements Parcelable {
         this.images = images;
     }
 
-    public List<Videos> getVideos() {
-        return videos;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setVideos(List<Videos> videos) {
-        this.videos = videos;
+    @Override
+    public void writeToParcel(android.os.Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.subline);
+        dest.writeString(this.navigationUrl);
+        dest.writeString(this.description);
+        dest.writeString(this.startTimeFormatted);
+        dest.writeParcelable(this.images, flags);
     }
-
-
 
     /*
-
+    @SerializedName("videos")
+    @Expose
+    private List<Videos> videos = new ArrayList<>();
     @SerializedName("newsletter_urlkey")
     @Expose
     private String newsletterUrlkey;
@@ -145,55 +172,5 @@ public class Campaign implements Parcelable {
     private String idCampaign;
     */
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(android.os.Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.subline);
-        dest.writeString(this.navigationUrl);
-        dest.writeString(this.description);
-        dest.writeString(this.startTimeFormatted);
-        dest.writeParcelable(this.images, flags);
-        dest.writeList(this.videos);
-    }
-
-    public Campaign() {
-    }
-
-    public Campaign(String name, String subline, String navigationUrl, String description, String startTimeFormatted, Images images, List<Videos> videos) {
-        this.name = name;
-        this.subline = subline;
-        this.navigationUrl = navigationUrl;
-        this.description = description;
-        this.startTimeFormatted = startTimeFormatted;
-        this.images = images;
-        this.videos = videos;
-    }
-
-    protected Campaign(android.os.Parcel in) {
-        this.name = in.readString();
-        this.subline = in.readString();
-        this.navigationUrl = in.readString();
-        this.description = in.readString();
-        this.startTimeFormatted = in.readString();
-        this.images = in.readParcelable(Images.class.getClassLoader());
-        this.videos = new ArrayList<Videos>();
-        in.readList(this.videos, Videos.class.getClassLoader());
-    }
-
-    public static final android.os.Parcelable.Creator<Campaign> CREATOR = new android.os.Parcelable.Creator<Campaign>() {
-        @Override
-        public Campaign createFromParcel(android.os.Parcel source) {
-            return new Campaign(source);
-        }
-
-        @Override
-        public Campaign[] newArray(int size) {
-            return new Campaign[size];
-        }
-    };
 }

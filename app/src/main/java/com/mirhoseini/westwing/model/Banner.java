@@ -11,6 +11,17 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Banner implements Parcelable {
 
+    public static final Parcelable.Creator<Banner> CREATOR = new Parcelable.Creator<Banner>() {
+        @Override
+        public Banner createFromParcel(Parcel source) {
+            return new Banner(source);
+        }
+
+        @Override
+        public Banner[] newArray(int size) {
+            return new Banner[size];
+        }
+    };
     @SerializedName("url")
     @Expose
     private String url;
@@ -20,6 +31,21 @@ public class Banner implements Parcelable {
     @SerializedName("height")
     @Expose
     private Integer height;
+
+    public Banner() {
+    }
+
+    public Banner(String url, Integer width, Integer height) {
+        this.url = url;
+        this.width = width;
+        this.height = height;
+    }
+
+    protected Banner(Parcel in) {
+        this.url = in.readString();
+        this.width = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.height = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
 
     public String getUrl() {
         return url;
@@ -56,31 +82,4 @@ public class Banner implements Parcelable {
         dest.writeValue(this.width);
         dest.writeValue(this.height);
     }
-
-    public Banner() {
-    }
-
-    public Banner(String url, Integer width, Integer height) {
-        this.url = url;
-        this.width = width;
-        this.height = height;
-    }
-
-    protected Banner(Parcel in) {
-        this.url = in.readString();
-        this.width = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.height = (Integer) in.readValue(Integer.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<Banner> CREATOR = new Parcelable.Creator<Banner>() {
-        @Override
-        public Banner createFromParcel(Parcel source) {
-            return new Banner(source);
-        }
-
-        @Override
-        public Banner[] newArray(int size) {
-            return new Banner[size];
-        }
-    };
 }

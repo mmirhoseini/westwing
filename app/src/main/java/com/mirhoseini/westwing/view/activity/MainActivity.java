@@ -29,16 +29,16 @@ import timber.log.Timber;
  * Created by Mohsen on 29/06/16.
  */
 public class MainActivity extends BaseActivity implements MainView, CampaignsListFragment.OnListFragmentInteractionListener {
-    public static final String TAG_CAMPAIGNS_LIST_FRAGMENT = "campaigns_list_fragment";
 
+    public static final String TAG_CAMPAIGNS_LIST_FRAGMENT = "campaigns_list_fragment";
 
     // injecting dependencies via Dagger
     @Inject
     Context context;
     @Inject
-    MainPresenter presenter;
-    @Inject
     Resources resources;
+    @Inject
+    MainPresenter presenter;
 
     // injecting views via Butterknife
     @BindView(R.id.fragment_container)

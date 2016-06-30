@@ -10,7 +10,6 @@ ext {
     okhttpVersion = "3.2.0"
     retrofitVersion = "2.0.0-beta4"
     picassoVersion = "2.5.2"
-    appSettingsVersion = "1.0.1"
     utilsVersion = "1.0.0"
     timberVersion = "4.1.2"
     daggerVersion = "2.4"
@@ -20,7 +19,6 @@ ext {
 
     //Testing
     junitVersion = "4.12"
-    dexmakerVersion = "1.2"
     mockitoVersion = "1.10.19"
     supportTestVesion = "0.5"
     robolectricVersion = "3.1-rc1"
@@ -35,7 +33,6 @@ ext {
             vectorSupport    : "com.android.support:support-vector-drawable:${androidSupportVersion}",
             rxjava           : "io.reactivex:rxjava:${rxjavaVersion}",
             rxandroid        : "io.reactivex:rxandroid:${rxandroidVersion}",
-            appSettings      : "com.mirhoseini.appsettings:appsettings:${appSettingsVersion}",
             utils            : "com.mirhoseini.utils:utils:${utilsVersion}",
             timber           : "com.jakewharton.timber:timber:${timberVersion}",
             butterknife      : "com.jakewharton:butterknife:${butterknifeVersion}",
@@ -61,8 +58,6 @@ ext {
             supportTestRules  : "com.android.support.test:rules:${supportTestVesion}",
             supportAnnotations: "com.android.support:support-annotations:${androidSupportVersion}",
             mockito           : "org.mockito:mockito-core:${mockitoVersion}",
-            dexmaker          : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
-            dexmakerMockito   : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
             espresso          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
             espressoContrib   : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
     ]
