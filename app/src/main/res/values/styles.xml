@@ -21,7 +21,7 @@
     </style>
 
     <style name="TextLarge" parent="TextAppearance.AppCompat.Large">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
 </resources>

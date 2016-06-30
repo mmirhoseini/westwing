@@ -31,6 +31,7 @@ This application was created by [Mohsen Mirhoseini Argi](http://mirhoseini.com),
 * Dagger v2.4
 * RxJava v1.1.3
 * RxAndroid v1.1.0
+* Picasso v2.5.2
 * Butterknife v8.0.1
 * Timber v4.1.2
 * AndroidUtils v1.0.0
@@ -67,6 +68,8 @@ The model (CampaignInteractor), would only be the gateway to the domain layer or
 
 The networking and API call are managed by [Retrofit](http://square.github.io/retrofit/) and OkHttp as its httpclient, contributed by [Square](http://square.github.io). Disk cache is also provided using this library, api call cache for 2 min and stall offline for 7 days. It also shows decent logs while application is running in Debug mode.
 
+Campaign's image and banner are loaded and cached using [Picasso](http://square.github.io/picasso/), contributed by [Square](http://square.github.io).
+
 Layout parts communications are managed by [RxJava](https://github.com/ReactiveX/RxJava) & [RxAndroid](https://github.com/ReactiveX/RxAndroid) contributed by [ReactiveX](http://reactivex.io).
 
 Dependency Injections are being managed by [Dagger](https://github.com/google/dagger) created by [Square](http://square.github.io) and now maintained by Google [Google](http://google.github.io/dagger/).
@@ -78,3 +81,5 @@ Whole projects Dependencies are placed in "libraries.gradle" to avoid version co
 For a better UI used new vector support with some SVG Vector images for a better UI.
 
 I am also a fan of Functional Programming and always use Retrolambda to use this ability in all Android versions, and try to think more functional.
+
+For a better UI/UX I prefer to add banner image inside the campaign details activity instead of the the simple image.

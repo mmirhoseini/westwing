@@ -24,6 +24,7 @@ import com.mirhoseini.westwing.model.Campaign;
 import com.mirhoseini.westwing.presentation.CampaignPresenter;
 import com.mirhoseini.westwing.view.CampaignView;
 import com.mirhoseini.westwing.view.MainView;
+import com.mirhoseini.westwing.view.adapter.CampaignsListRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
@@ -233,7 +234,7 @@ public class CampaignsListFragment extends BaseFragment implements CampaignView 
             recyclerView.setLayoutManager(new GridLayoutManager(context, columnCount));
         }
 
-        adapter = new CampaignsListRecyclerViewAdapter(campaigns, listener);
+        adapter = new CampaignsListRecyclerViewAdapter(context, campaigns, listener);
         recyclerView.setAdapter(adapter);
     }
 

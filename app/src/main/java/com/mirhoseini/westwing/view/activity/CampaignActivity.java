@@ -49,8 +49,6 @@ public class CampaignActivity extends BaseActivity {
     TextView subLine;
     @BindView(R.id.description)
     TextView description;
-    @BindView(R.id.navigation_url)
-    TextView navigationUrl;
 
     @OnClick(R.id.banner)
     void onBannerClick(View view) {
@@ -100,7 +98,6 @@ public class CampaignActivity extends BaseActivity {
         time.setText(campaign.getStartTimeFormatted());
         subLine.setText(campaign.getSubline());
         description.setText(campaign.getDescription());
-        navigationUrl.setText(campaign.getNavigationUrl());
     }
 
     private void loadBanner() {
